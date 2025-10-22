@@ -1,6 +1,7 @@
 package factory;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 import domain.DigestiveSymptom;
@@ -9,7 +10,8 @@ import domain.RespiratorySymptom;
 import domain.Symptom;
 
 public class SymptomFactory {
-	public Symptom createSymptom(String symptomName)  {
+	private static HashMap<String,Symptom> symptomMap = new HashMap<String, Symptom>();
+	public static Symptom createSymptom(String symptomName)  {
 		 List<String> impact5 = Arrays.asList("fiebre", "tos seca", "astenia","expectoracion");
 		 List<Double> index5 = Arrays.asList(87.9, 67.7, 38.1, 33.4);
 		 List<String> impact3 = Arrays.asList("disnea", "dolor de garganta", "cefalea","mialgia","escalofrios");
@@ -29,9 +31,15 @@ public class SymptomFactory {
 		 else if (impact1.contains(symptomName)) {impact=1; index= index1.get(impact1.indexOf(symptomName));}
 		 
 		 if (impact!=0)  {
-			 if (digestiveSymptom.contains(symptomName)) return new DigestiveSymptom(symptomName,(int)index, impact);
-			 if (neuroMuscularSymptom.contains(symptomName)) return new NeuroMuscularSymptom(symptomName,(int)index, impact);
-			 if (respiratorySymptom.contains(symptomName)) return new RespiratorySymptom(symptomName,(int)index, impact);
+			 Symptom sMap = symptomMap.get(symptomName);
+			 if(sMap!=null) return sMap;
+			 Symptom s = null;
+			 if (digestiveSymptom.contains(symptomName)) s = new DigestiveSymptom(symptomName,(int)index, impact);
+			 if (neuroMuscularSymptom.contains(symptomName)) s = new NeuroMuscularSymptom(symptomName,(int)index, impact);
+			 if (respiratorySymptom.contains(symptomName)) s = new RespiratorySymptom(symptomName,(int)index, impact);
+			 symptomMap.put(symptomName, s);
+			 System.out.println("Elementu berri bat sortu da.");
+			 return s;
 		 }
 		 	return null;		
 	}
