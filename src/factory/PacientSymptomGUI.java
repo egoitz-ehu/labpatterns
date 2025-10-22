@@ -13,10 +13,12 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.Iterator;
+import java.util.Observable;
+import java.util.Observer;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 
-public class PacientSymptomGUI extends JFrame {
+public class PacientSymptomGUI extends JFrame{
 
 	
 	private Covid19Pacient p;
@@ -36,6 +38,7 @@ public class PacientSymptomGUI extends JFrame {
 	 * Create the frame.
 	 */
 	public PacientSymptomGUI(Covid19Pacient p) {
+		
 		this.p=p;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 435);
@@ -106,7 +109,6 @@ public class PacientSymptomGUI extends JFrame {
 		reportLabel.setBounds(42, 263, 360, 114);
 		contentPane.add(reportLabel);
 		this.setVisible(true);
-		
 	}
 	
 	public void addSymptom(Covid19Pacient p, String symptomName) {

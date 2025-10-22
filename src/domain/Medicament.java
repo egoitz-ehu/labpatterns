@@ -12,7 +12,6 @@ import factory.SymptomFactory;
 public class Medicament {
 	private String name;
 	private List<Symptom> symptoms = new ArrayList<Symptom>();
-	private SymptomFactory sF;
 
 	public String getName() {
 		return name;
@@ -22,15 +21,14 @@ public class Medicament {
 		this.name = name;
 	}
 
-	public Medicament(String name, SymptomFactory sF) {
+	public Medicament(String name) {
 		super();
 		this.name = name;
-		this.sF=sF;
 	}
 
 	public Symptom addSymptomByName(String symptom) {
 		Symptom s = null;
-		s = sF.createSymptom(symptom);
+		s = SymptomFactory.createSymptom(symptom);
 		if (s != null) {
 			symptoms.add(s);
 		}
